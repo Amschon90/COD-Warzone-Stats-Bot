@@ -21,6 +21,10 @@ class GameStats:
     self.surtime = surtime
 
 g = gameData['data']
-print(g['matches'][0])
+#print(g['matches'][0])
 
 stats = GameStats('Zigon','Last Game','10','14','1422','0','0','12:34')
+
+statsprintout = (f'{stats.pname} - {stats.reqtype}\nKills: {stats.kills}     Deaths: {stats.deaths}\nDamage: {stats.dmg}  Gulag Score: {stats.gk}-{stats.gd}\nTotal Survival Time: {stats.surtime}')
+
+print(statsprintout)
