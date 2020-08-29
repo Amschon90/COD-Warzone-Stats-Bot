@@ -52,7 +52,16 @@ async def embed(ctx,reqtype):
     if reqtype == 'l5':
         reqtype = 'Last 5 Games'
     #description="this supports [named links](https://discordapp.com) on top of the previously shown subset of markdown. ```\nyes, even code blocks```"
-    embed = discord.Embed(title=f"Call of Duty - {reqtype} Summary", colour=discord.Colour(0x200893), description=f"{main.statsprintout}")
+    embed = discord.Embed(title=f"Call of Duty - {reqtype} Summary", colour=discord.Colour(0x200893), description="**Game Mode:** Kingslayer Trios")
+    embed.add_field(name="Kills", value="9", inline=True)
+    embed.add_field(name="Deaths", value="15", inline=True)
+    embed.add_field(name="Kill/Death Ratio", value="0.60 (-.03)", inline=True)
+    embed.add_field(name="Damage Dealt", value="1490", inline=True)
+    embed.add_field(name="Damage Taken", value="1490", inline=True)
+    embed.add_field(name="Gulag Score", value="0-0", inline=False)
+    embed.add_field(name="Loadout", value="Yes", inline=True)
+    embed.add_field(name="Primary Weapon", value="Grau 5.56", inline=True)
+    embed.add_field(name="Secondary Weapon", value="HDR", inline=True)
     embed.set_thumbnail(url="https://imag.malavida.com/mvimgbig/download-fs/call-of-duty-warzone-26418-0.jpg")
     embed.set_author(name=f"{ctx.message.author.name}", icon_url=f"https://cdn.discordapp.com/avatars/{ctx.message.author.id}/{ctx.message.author.avatar}.png")
     embed.set_footer(text="Project source code available @ https://github.com/Amschon90", icon_url="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
