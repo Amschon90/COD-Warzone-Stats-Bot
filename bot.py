@@ -48,13 +48,13 @@ async def getstats(ctx):
     await ctx.send(response)
 
 @bot.command('embed')
-async def embed(ctx):
-    embed = discord.Embed(title="title ~~(did you know you can have markdown here too?)~~", colour=discord.Colour(0x200893), description="this supports [named links](https://discordapp.com) on top of the previously shown subset of markdown. ```\nyes, even code blocks```")
-
-    embed.set_image(url="https://cdn.discordapp.com/embed/avatars/0.png")
+async def embed(ctx,reqtype):
+    if reqtype == 'l5':
+        reqtype = 'Last 5 Games'
+    #description="this supports [named links](https://discordapp.com) on top of the previously shown subset of markdown. ```\nyes, even code blocks```"
+    embed = discord.Embed(title=f"Call of Duty - {reqtype} Summary", colour=discord.Colour(0x200893), description=f"{main.statsprintout}")
     embed.set_thumbnail(url="https://imag.malavida.com/mvimgbig/download-fs/call-of-duty-warzone-26418-0.jpg")
-    embed.set_author(name=f"{ctx.message.author.id}", icon_url=f"https://cdn.discordapp.com/avatars/{ctx.message.author.id}/{ctx.message.author.avatar}.png")
-    embed.set_footer(text="Bot built by Dank Bot Labs.", icon_url="https://cdn.discordapp.com/embed/avatars/0.png")
-
+    embed.set_author(name=f"{ctx.message.author.name}", icon_url=f"https://cdn.discordapp.com/avatars/{ctx.message.author.id}/{ctx.message.author.avatar}.png")
+    embed.set_footer(text="Project source code available @ https://github.com/Amschon90", icon_url="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
     await ctx.send(embed=embed)
 bot.run(TOKEN)
