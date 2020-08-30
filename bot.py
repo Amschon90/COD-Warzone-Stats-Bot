@@ -64,8 +64,9 @@ async def embed(ctx,reqtype):
 
 @bot.command('summary')
 async def summary(ctx,num):
+    num = int(num)
     u = user.loadusers()
-    if int(num) > 20:
+    if num > 20:
         await ctx.send('I can only show your last 20 games.')
         num = 20
     if user.isregistered(u, ctx.message.author.id):
@@ -84,4 +85,25 @@ async def summary(ctx,num):
     else:
         await ctx.send("You aren't registered. Please use the !register command, followed by your Battle.net ID.")
 
+@bot.command('detail')
+async def detail(ctx, num):
+    num = int(num)
+    u = user.loadusers()
+    if num > 20:
+        await ctx.send('I can only show your last 20 games.')
+        num = 20
+    if user.isregistered(u, ctx.message.author.id):
+        for i in range(num):
+            d = fetch.detailStats(i, u[str(ctx.message.author.id)])
+            embed = discord.Embed(title=f"Call of Duty - Game {i}", colour=discord.Colour(0x200893))
+            embed.add_field(name="Kills", value=f"{int(d.k)}", inline=True)
+            embed.add_field(name="Deaths", value=f"{int(d.d)}", inline=True)
+            embed.add_field(name="Kill/Death Ratio", value=f"{round(d.k/d.d,2)}", inline=True)
+            embed.add_field(name="Gulag Score", value=f"W: {int(d.gk)} - L: {int(d.gd)}", inline=False)
+            embed.add_field(name="Damage Dealt", value=f"{int(d.dd)}", inline=True)
+            embed.add_field(name="Damage Taken", value=f"{int(d.dt)}", inline=True)
+            embed.set_thumbnail(url="https://imag.malavida.com/mvimgbig/download-fs/call-of-duty-warzone-26418-0.jpg")
+            embed.set_author(name=f"{ctx.message.author.name}", icon_url=f"https://cdn.discordapp.com/avatars/{ctx.message.author.id}/{ctx.message.author.avatar}.png")
+            embed.set_footer(text="Project source code available @ https://github.com/Amschon90", icon_url="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
+            await ctx.send(embed=embed)
 bot.run(TOKEN)
